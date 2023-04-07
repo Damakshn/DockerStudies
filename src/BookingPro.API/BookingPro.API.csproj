@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookingPro.Domain\BookingPro.Domain.csproj" />
+    <ProjectReference Include="..\BookingPro.Infrastructure.Database\BookingPro.Infrastructure.Database.csproj" />
   </ItemGroup>
 
 </Project>
