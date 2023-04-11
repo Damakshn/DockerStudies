@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookingPro.Domain.Flights
+﻿namespace BookingPro.Domain.Flights
 {
     /// <summary>
     /// Статус рейса

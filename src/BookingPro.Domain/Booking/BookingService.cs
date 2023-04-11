@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookingPro.Domain.Booking.BookingHistory;
+﻿using BookingPro.Domain.Booking.BookingHistory;
 using BookingPro.Domain.Flights;
 using BookingPro.Domain.Common.Abstractions;
 using BookingPro.Domain.Booking.Rules;
@@ -15,6 +10,7 @@ namespace BookingPro.Domain.Booking
         public string CreateBooking(IEnumerable<BookingInputModel> bookings, IEnumerable<FlightInfo> flightInfos)
         {
             CheckRule(new CannotBookAFlightIfNoSeatsAvailableRule(bookings, flightInfos));
+            CheckRule(new OnlyScheduledFlightsAreAvailableForBookingRule(flightInfos));
 
             return "";
         }
