@@ -12,7 +12,7 @@ namespace BookingPro.Domain.Passengers
 
         public string Name { get; set; }
 
-        public string ContactInfo { get; set; }
+        public ContactData ContactData { get; set; }
 
     }
 }

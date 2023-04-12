@@ -22,15 +22,15 @@ namespace BookingPro.Domain.Flights
             SeatsAvailable = seatsAvailable;
         }
 
-        public int FlightId { get; private set; }
+        public int FlightId { get; set; }
 
-        public DateTime ScheduledDeparture { get; private set; }
+        public DateTime ScheduledDeparture { get; set; }
 
-        public DateTime ScheduledArrival { get; private set; }
+        public DateTime ScheduledArrival { get; set; }
 
-        public FlightStatus Status { get; private set; }
+        public FlightStatus Status { get; set; }
 
-        public Dictionary<FareConditions, int> SeatsAvailable { get; private set; }
+        public Dictionary<FareConditions, int> SeatsAvailable { get; set; }
 
     }
 }
