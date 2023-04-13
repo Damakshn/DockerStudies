@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BookingPro.Domain\BookingPro.Domain.csproj" />
     <ProjectReference Include="..\BookingPro.Infrastructure.Database\BookingPro.Infrastructure.Database.csproj" />
   </ItemGroup>

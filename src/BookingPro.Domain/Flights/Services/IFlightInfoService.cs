@@ -16,6 +16,6 @@ namespace BookingPro.Domain.Flights.Services
         /// </summary>
         /// <param name="flightIds">ID рейсов</param>
         /// <returns>Информация о рейсах, см. <see cref="FlightInfo"/></returns>
-        List<FlightInfo> GetFileInfos(IEnumerable<int> flightIds);
+        List<FlightInfo> GetFlightInfos(IEnumerable<int> flightIds);
     }
 }
