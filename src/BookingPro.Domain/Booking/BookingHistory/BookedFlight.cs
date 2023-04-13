@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookingPro.Domain.Flights;
+﻿using BookingPro.Domain.Flights;
 
 namespace BookingPro.Domain.Booking.BookingHistory
 {
@@ -12,20 +7,28 @@ namespace BookingPro.Domain.Booking.BookingHistory
     /// </summary>
     public class BookedFlight
     {
-        public DateTime When { get; set; }
+        public required string BookRef { get; init; }
 
-        public string From { get; set;}
+        public required DateTime BookDate { get; init; }
 
-        public string To { get; set; }
+        public required string PassengerId { get; init; }
 
-        public string AircraftModel { get; set; }
+        public required string PassengerName { get; init; }
 
-        public FlightStatus FlightStatus { get; set; }
+        public required DateTime When { get; init; }
 
-        public FareConditions FareConditions { get; set; }
+        public required string From { get; init;}
 
-        public string SeatNo { get; set; }
+        public required string To { get; init; }
 
-        public int Amount { get; set; }
+        public required string AircraftModel { get; init; }
+
+        public required FlightStatus FlightStatus { get; init; }
+
+        public required FareConditions FareConditions { get; init; }
+
+        public required string SeatNo { get; init; }
+
+        public required int Amount { get; init; }
     }
 }

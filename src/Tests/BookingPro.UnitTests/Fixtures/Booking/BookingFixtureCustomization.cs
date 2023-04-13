@@ -1,6 +1,9 @@
 ﻿using AutoFixture;
+using AutoFixture.AutoMoq;
+using BookingPro.Domain.Booking;
 using BookingPro.Domain.Flights;
 using BookingPro.Domain.Passengers;
+using Moq;
 
 namespace BookingPro.UnitTests.Fixtures.Booking
 {
@@ -8,6 +11,10 @@ namespace BookingPro.UnitTests.Fixtures.Booking
     {
         public void Customize(IFixture fixture)
         {
+            fixture.Customize(new AutoMoqCustomization());
+            var bookingRepositoryMock = fixture.Freeze<Mock<IBookingRepository>>();
+            bookingRepositoryMock.Setup(m => m.Add(It.IsAny<IEnumerable<BookingInputModel>>())).Returns("00F012");
+
             fixture.Customizations.Add(new FlightIdSpecimenBuilder());
 
             fixture.Customize<ContactData>(

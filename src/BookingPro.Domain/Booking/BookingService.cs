@@ -7,17 +7,25 @@ namespace BookingPro.Domain.Booking
 {
     public class BookingService : DomainService, IBookingService
     {
+        private readonly IBookingRepository _repository;
+
+        public BookingService(IBookingRepository bookingRepository)
+        {
+            _repository = bookingRepository;
+        }
+
         public string CreateBooking(IEnumerable<BookingInputModel> bookings, IEnumerable<FlightInfo> flightInfos)
         {
             CheckRule(new CannotBookAFlightIfNoSeatsAvailableRule(bookings, flightInfos));
             CheckRule(new OnlyScheduledFlightsAreAvailableForBookingRule(flightInfos));
-
-            return "";
+            return _repository.Add(bookings);
         }
 
-        public List<BookingInfo> GetBookingHistory(string passengerId)
+        public List<BookedFlight> GetBookingHistory(string passengerId)
         {
-            throw new NotImplementedException();
+            CheckRule(new PassengerIdMustNotBeEmptyRule(passengerId));
+
+            return _repository.GetTicketsForPassenger(passengerId);
         }
     }
 }

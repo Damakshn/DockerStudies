@@ -26,6 +26,6 @@ namespace BookingPro.Domain.Booking
         /// </summary>
         /// <param name="passengerId">ID пассажира</param>
         /// <returns>История бронирований</returns>
-        List<BookingInfo> GetBookingHistory(string passengerId);
+        List<BookedFlight> GetBookingHistory(string passengerId);
     }
 }
