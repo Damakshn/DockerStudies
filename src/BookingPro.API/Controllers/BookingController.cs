@@ -4,6 +4,7 @@ using BookingPro.Domain.Booking;
 using BookingPro.Domain.Flights.Services;
 using BookingPro.Domain.Common.ErrorHandling;
 using System.Web.Http.Results;
+using BookingPro.Domain.Booking.BookingHistory;
 
 namespace BookingPro.API.Controllers
 {
@@ -41,10 +42,11 @@ namespace BookingPro.API.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult<string> GetBooking()
+        [HttpGet("tickets/{passengerId}")]
+        public ActionResult<List<BookedFlight>> GetBooking([FromRoute]string passengerId)
         {
-            return Ok("Booking service lives here");
+            var result = _bookingService.GetBookingHistory(passengerId);
+            return Ok(result);
         }
     }
 }
