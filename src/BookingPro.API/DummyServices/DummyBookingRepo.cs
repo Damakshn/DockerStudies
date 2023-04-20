@@ -1,4 +1,5 @@
-﻿using BookingPro.Domain.Booking;
+﻿using System.Collections.Generic;
+using BookingPro.Domain.Booking;
 using BookingPro.Domain.Booking.BookingHistory;
 
 namespace BookingPro.API.DummyServices
@@ -10,13 +11,12 @@ namespace BookingPro.API.DummyServices
             return "000F1A";
         }
 
-        public List<BookedFlight> GetTicketsForPassenger(string passengerId)
+        public Task<List<BookedFlight>> GetTicketsForPassenger(string passengerId)
         {
             DateTime departure = DateTime.SpecifyKind(DateTime.Now.AddMonths(1), DateTimeKind.Utc);
             DateTime nowUtc = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
             string passengerName = "ALEXEY IVANOV";
-
-            return new()
+            return Task.FromResult<List<BookedFlight>>(new()
             {
                 new()
                 {
@@ -48,7 +48,7 @@ namespace BookingPro.API.DummyServices
                     SeatNo = "8A",
                     Amount = 15000
                 }
-            };
+            });
         }
     }
 }

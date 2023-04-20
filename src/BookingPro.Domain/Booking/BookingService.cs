@@ -21,7 +21,7 @@ namespace BookingPro.Domain.Booking
             return _repository.Add(bookings);
         }
 
-        public List<BookedFlight> GetBookingHistory(string passengerId)
+        public Task<List<BookedFlight>> GetBookingHistory(string passengerId)
         {
             CheckRule(new PassengerIdMustNotBeEmptyRule(passengerId));
 

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using BookingPro.Domain.Booking;
 using BookingPro.Domain.Flights.Services;
 using BookingPro.Domain.Common.ErrorHandling;
-using System.Web.Http.Results;
 using BookingPro.Domain.Booking.BookingHistory;
 
 namespace BookingPro.API.Controllers
@@ -43,9 +42,9 @@ namespace BookingPro.API.Controllers
         }
 
         [HttpGet("tickets/{passengerId}")]
-        public ActionResult<List<BookedFlight>> GetBooking([FromRoute]string passengerId)
+        public async Task<ActionResult<List<BookedFlight>>> GetBookingAsync([FromRoute]string passengerId)
         {
-            var result = _bookingService.GetBookingHistory(passengerId);
+            var result = await _bookingService.GetBookingHistory(passengerId);
             return Ok(result);
         }
     }

@@ -6,6 +6,6 @@ namespace BookingPro.Domain.Booking
     {
         string Add(IEnumerable<BookingInputModel> bookings);
 
-        List<BookedFlight> GetTicketsForPassenger(string passengerId);
+        Task<List<BookedFlight>> GetTicketsForPassenger(string passengerId);
     }
 }
