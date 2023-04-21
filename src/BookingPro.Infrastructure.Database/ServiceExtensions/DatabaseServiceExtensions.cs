@@ -13,9 +13,11 @@ namespace BookingPro.Infrastructure.Database.ServiceExtensions
 {
     public static class DatabaseServiceExtensions
     {
-        public static void AddDatabase(this IServiceCollection services)
+        public static void AddDatabase(this IServiceCollection services, string? connectionString)
         {
-            services.AddScoped((sp) => new NpgsqlConnection("Host=localhost; Port=5432; Username=postgres; Password=12345; Database=demo; Include Error Detail=true"));
+            ArgumentNullException.ThrowIfNull(connectionString, nameof(connectionString));
+
+            services.AddScoped((sp) => new NpgsqlConnection(connectionString));
             services.AddScoped<IBookingRepository, BookingRepository>();
         }
     }

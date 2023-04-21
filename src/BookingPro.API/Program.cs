@@ -5,8 +5,8 @@ using BookingPro.Infrastructure.Database.ServiceExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDatabase();
-//builder.Services.AddScoped<IBookingRepository, DummyBookingRepo>();
+builder.Services.AddLogging();
+builder.Services.AddDatabase(builder.Configuration.GetConnectionString("BookingDatabase"));
 builder.Services.AddScoped<IFlightInfoService, DummyFlightInfoRepo>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 

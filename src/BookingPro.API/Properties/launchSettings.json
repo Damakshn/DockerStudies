@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5154"
+      "applicationUrl": "http://localhost:5000"
     },
     "https": {
       "commandName": "Project",
@@ -30,7 +30,9 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": false,
+      "httpPort": 5000,
+      "sslPort": 44318
     }
   },
   "iisSettings": {
