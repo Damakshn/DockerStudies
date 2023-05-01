@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: BookingPro.API/Dockerfile
-    ports:
-      - "5000:80"
     env_file:
       - ./settings.env
     depends_on:
@@ -25,6 +23,18 @@ services:
         target: /docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+  bookingpro.cache.redis:
+    image: bitnami/redis:6.2.12
+    expose:
+      - "6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - type: volume
+        source: redis-data
+        target: /bitnami/redis/data
 volumes:
   booking-data:
+    driver: local
+  redis-data:
     driver: local

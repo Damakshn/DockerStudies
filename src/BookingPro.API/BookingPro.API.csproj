@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BookingPro.Domain\BookingPro.Domain.csproj" />
     <ProjectReference Include="..\BookingPro.Infrastructure.Database\BookingPro.Infrastructure.Database.csproj" />
+    <ProjectReference Include="..\BookingPro.Infrastructure.Cache\BookingPro.Infrastructure.Cache.csproj" />
   </ItemGroup>
 
 </Project>
