@@ -26,6 +26,6 @@ namespace BookingPro.Domain.Booking
         /// </summary>
         /// <param name="passengerId">ID пассажира</param>
         /// <returns>История бронирований</returns>
-        Task<List<BookedFlight>> GetBookingHistory(string passengerId);
+        Task<List<BookedFlight>> GetBookingHistoryAsync(string passengerId, CancellationToken cancellationToken = default);
     }
 }

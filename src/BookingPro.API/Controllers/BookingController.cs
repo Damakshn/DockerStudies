@@ -42,9 +42,9 @@ namespace BookingPro.API.Controllers
         }
 
         [HttpGet("tickets/{passengerId}")]
-        public async Task<ActionResult<List<BookedFlight>>> GetBookingAsync([FromRoute]string passengerId)
+        public async Task<ActionResult<List<BookedFlight>>> GetBookingAsync([FromRoute]string passengerId, CancellationToken cancellationToken)
         {
-            var result = await _bookingService.GetBookingHistory(passengerId);
+            var result = await _bookingService.GetBookingHistoryAsync(passengerId);
             return Ok(result);
         }
     }

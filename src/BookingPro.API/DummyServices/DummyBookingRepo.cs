@@ -11,7 +11,7 @@ namespace BookingPro.API.DummyServices
             return "000F1A";
         }
 
-        public Task<List<BookedFlight>> GetTicketsForPassenger(string passengerId)
+        public Task<List<BookedFlight>> GetTicketsForPassengerAsync(string passengerId, CancellationToken cancellationToken = default)
         {
             DateTime departure = DateTime.SpecifyKind(DateTime.Now.AddMonths(1), DateTimeKind.Utc);
             DateTime nowUtc = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);

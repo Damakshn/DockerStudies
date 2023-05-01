@@ -30,7 +30,7 @@ namespace BookingPro.Infrastructure.Database.Booking
 			_connection.Close();
         }
 
-        public async Task<List<BookedFlight>> GetTicketsForPassenger(string passengerId)
+        public async Task<List<BookedFlight>> GetTicketsForPassengerAsync(string passengerId, CancellationToken cancellationToken = default)
         {
             string query = @"select
 				b.book_ref as ""BookRef"",
@@ -40,7 +40,7 @@ namespace BookingPro.Infrastructure.Database.Booking
 				f.scheduled_departure as ""When"",
 				f.departure_airport as ""From"",
 				f.arrival_airport as ""To"",
-				ad.model->>'en' as ""AircraftModel"",
+				arc.model as ""AircraftModel"",
 				case 
 					when f.status = 'Scheduled' then 1
 					when f.status = 'OnTime' then 2
@@ -57,18 +57,18 @@ namespace BookingPro.Infrastructure.Database.Booking
 				bp.seat_no as ""SeatNo"",
 				tf.amount as ""Amount""
 			from 
-				ticket_flights tf
-				join tickets t on tf.ticket_no = t.ticket_no
-				join bookings b on b.book_ref = t.book_ref
-				join flights f on f.flight_id = tf.flight_id 
-				join aircrafts_data ad on ad.aircraft_code = f.aircraft_code 
-				left join boarding_passes bp on bp.ticket_no = tf.ticket_no and bp.flight_id = tf.flight_id
+				bookings.ticket_flights tf
+				join bookings.tickets t on tf.ticket_no = t.ticket_no
+				join bookings.bookings b on b.book_ref = t.book_ref
+				join bookings.flights f on f.flight_id = tf.flight_id 
+				join bookings.aircrafts arc on arc.aircraft_code = f.aircraft_code 
+				left join bookings.boarding_passes bp on bp.ticket_no = tf.ticket_no and bp.flight_id = tf.flight_id
 			where t.passenger_id = $1";
 
             using NpgsqlCommand cmd = new(query, _connection);
 			cmd.Parameters.Add(new() { Value = passengerId });
 
-			using var reader = await cmd.ExecuteReaderAsync();
+			using var reader = await cmd.ExecuteReaderAsync(cancellationToken);
 			List<BookedFlight> result = new();
 			while (reader.Read())
 			{

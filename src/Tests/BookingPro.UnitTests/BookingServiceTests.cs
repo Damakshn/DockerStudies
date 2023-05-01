@@ -7,6 +7,7 @@ using BookingPro.UnitTests.Fixtures.Booking;
 using AutoFixture;
 using System.Text.RegularExpressions;
 using Moq;
+using BookingPro.Domain.Booking.BookingHistory;
 
 namespace BookingPro.UnitTests;
 
@@ -72,22 +73,21 @@ public class BookingServiceTests
         IFixture fixture = new Fixture();
         fixture.Customize(new BookingFixtureCustomization());
         BookingService sut = fixture.Create<BookingService>();
-        Action action = () => sut.GetBookingHistory(passengerId);
-
-        action.Should().Throw<DomainException>().WithMessage("Код пассажира должен быть заполнен");
+        Func<Task<List<BookedFlight>>> work = () => sut.GetBookingHistoryAsync(passengerId);
+        work.Should().ThrowAsync<DomainException>().WithMessage("Код пассажира должен быть заполнен");
     }
 
     [Test]
     [BookingData]
-    public void Can_retrieve_booking_history_from_repository(Mock<IBookingRepository> mockedRepository)
+    public async Task Can_retrieve_booking_history_from_repository(Mock<IBookingRepository> mockedRepository)
     {
         var repository = mockedRepository.Object;
         BookingService sut = new(repository);
 
         string passengerId = "1111 222333";
 
-        _ = sut.GetBookingHistory(passengerId);
+        _ = await sut.GetBookingHistoryAsync(passengerId);
 
-        mockedRepository.Verify(repository => repository.GetTicketsForPassenger(passengerId), Times.Exactly(1));
+        mockedRepository.Verify(repository => repository.GetTicketsForPassengerAsync(passengerId, default), Times.Exactly(1));
     }
 }

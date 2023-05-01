@@ -6,6 +6,6 @@ namespace BookingPro.Domain.Booking
     {
         string Add(IEnumerable<BookingInputModel> bookings);
 
-        Task<List<BookedFlight>> GetTicketsForPassenger(string passengerId);
+        Task<List<BookedFlight>> GetTicketsForPassengerAsync(string passengerId, CancellationToken cancellationToken = default);
     }
 }

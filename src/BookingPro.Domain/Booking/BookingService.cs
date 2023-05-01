@@ -21,11 +21,11 @@ namespace BookingPro.Domain.Booking
             return _repository.Add(bookings);
         }
 
-        public Task<List<BookedFlight>> GetBookingHistory(string passengerId)
+        public Task<List<BookedFlight>> GetBookingHistoryAsync(string passengerId, CancellationToken cancellationToken = default)
         {
             CheckRule(new PassengerIdMustNotBeEmptyRule(passengerId));
 
-            return _repository.GetTicketsForPassenger(passengerId);
+            return _repository.GetTicketsForPassengerAsync(passengerId, cancellationToken);
         }
     }
 }
